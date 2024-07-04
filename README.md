@@ -1,7 +1,7 @@
 
 # TL;DR
 ```
-git clone http://lyra.g1:3000/lprager/azure-workload-identity-POC.git
+git clone https://github.com/ludwigprager/azure-workload-identity-POC.git
 ./azure-workload-identity-POC/10-create.sh <your subscription name>
 ```
 
