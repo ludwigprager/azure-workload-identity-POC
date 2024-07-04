@@ -36,12 +36,12 @@ if federated-identity-exists $RESOURCE_GROUP $FICID $UAID; then
 else
 
   # get the OIDC Issuer URL
-  AKS_OIDC_ISSUER="$(az aks show -n ${AKS_NAME} -g ${RESOURCE_GROUP} --query "oidcIssuerProfile.issuerUrl" -otsv)"
+  AKS_OIDC_ISSUER="$(azcli az aks show -n ${AKS_NAME} -g ${RESOURCE_GROUP} --query "oidcIssuerProfile.issuerUrl" -otsv)"
   
   echo creating federated identity credential
   # Use the az identity federated-credential create command to create the federated identity credential 
   # between the managed identity, the service account issuer, and the subject.
-  az identity federated-credential create -onone \
+  azcli az identity federated-credential create -onone \
     --name ${FICID} \
     --identity-name ${UAID} \
     --resource-group ${RESOURCE_GROUP} \

@@ -13,7 +13,7 @@ source set-env.sh
 
 if [ $(azcli az group exists --name $RESOURCE_GROUP) == false ]; then
   echo "creating RG ${RESOURCE_GROUP}"
-  azcli az group create --name ${RESOURCE_GROUP} --location ${LOCATION}
+  azcli az group create --name ${RESOURCE_GROUP} --location ${LOCATION} -onone
 else
   echo "RG ${RESOURCE_GROUP} already exists"
 fi

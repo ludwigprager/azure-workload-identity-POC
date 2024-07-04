@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
 
 
-get-account-key() {
-  local ACCOUNT_KEY=$(az storage account keys list \
-    --resource-group $RESOURCE_GROUP_NAME \
-    --account-name $STORAGE_ACCOUNT_NAME \
-    --query '[0].value' -o tsv)
-
-  if [[ ! -z ${ACCOUNT_KEY} ]]; then
-    printf ${ACCOUNT_KEY}
-  fi
-}
-export -f get-account-key
-
 install-kubectl() {
   # install kubectl
   if [[ ! -f ./kubectl ]]; then
@@ -21,13 +9,12 @@ install-kubectl() {
     echo downloading kubectl $KUBECTL_VERSION
     curl -LO https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl
     chmod +x kubectl
-fi
-
+  fi
 }
 
 
 get-subscription-id() {
-  local subscription_id=$(az account list -o json | jq -r .[].id)
+  local subscription_id=$(azcli az account list -o json | jq -r .[].id)
 
   if [[ ! -z ${subscription_id} ]]; then
     printf ${subscription_id}
@@ -36,8 +23,8 @@ get-subscription-id() {
 export -f get-subscription-id
 
 azcli() {
-# local C_TOOL=docker
-  local C_TOOL=podman
+  local C_TOOL=docker
+# local C_TOOL=podman
   local IMAGE=mcr.microsoft.com/azure-cli:2.61.0
 
   if [ $# -eq 0 ]; then
@@ -76,7 +63,7 @@ aks-cluster-exists() {
   local resource_group=$1
   local cluster_name=$2
 
-  if azcli  az aks show --name $cluster_name -g $resource_group > /dev/null 2>&1 ; then
+  if azcli az aks show --name $cluster_name -g $resource_group > /dev/null 2>&1 ; then
     # 0 = true
     return 0 
   else
@@ -90,7 +77,7 @@ identity-exists() {
   local resource_group=$1
   local identity_name=$2
 
-  if azcli  az identity  show --name $identity_name -g $resource_group > /dev/null; then
+  if azcli az identity  show --name $identity_name -g $resource_group > /dev/null; then
     return 0 
   fi
   return 1
@@ -102,7 +89,7 @@ federated-identity-exists() {
   local name=$2
   local identity_name=$3
 
-  if azcli  az identity  federated-credential show \
+  if azcli az identity  federated-credential show \
        --name $name \
        --identity-name $identity_name \
        -g $resource_group \

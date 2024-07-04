@@ -2,10 +2,10 @@
 # TL;DR
 ```
 git clone http://lyra.g1:3000/lprager/azure-workload-identity-POC.git
-./azure-workload-identity-POC/10-create.sh bla
+./azure-workload-identity-POC/10-create.sh <your subscription name>
 ```
 
-# Preconditions
+# Prerequisites
 - install podman (or docker)
 - assign yourself the RBAC role 'Key Vault Administrator' for the subscription you want to run this POC in.
 - select a unique name for the [`key vault`](./set-env.sh#L7)

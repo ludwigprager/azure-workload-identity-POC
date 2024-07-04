@@ -10,7 +10,7 @@ source set-env.sh
 install-kubectl
 export KUBECONFIG=$BASEDIR/kubeconfig
 
-export KEYVAULT_URL="$(az keyvault show -g ${RESOURCE_GROUP} -n ${KEYVAULT_NAME} --query properties.vaultUri -o tsv)"
+export KEYVAULT_URL="$(azcli az keyvault show -g ${RESOURCE_GROUP} -n ${KEYVAULT_NAME} --query properties.vaultUri -o tsv)"
 cat <<EOF | ./kubectl apply -f -
 apiVersion: v1
 kind: Pod

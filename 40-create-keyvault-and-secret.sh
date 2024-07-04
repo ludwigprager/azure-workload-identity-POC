@@ -14,7 +14,7 @@ USER_ASSIGNED_CLIENT_ID=$( get-identity-id-from-identity-name $RESOURCE_GROUP $U
 if ! keyvault-exists $RESOURCE_GROUP $KEYVAULT_NAME; then
 
   echo "creating keyvault and secret"
-  azcli az keyvault create -o none \
+  azcli az keyvault create -onone \
     --name ${KEYVAULT_NAME} \
     --resource-group ${RESOURCE_GROUP} \
     --location ${LOCATION} \
