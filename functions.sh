@@ -23,8 +23,8 @@ get-subscription-id() {
 export -f get-subscription-id
 
 azcli() {
-  local C_TOOL=docker
-# local C_TOOL=podman
+# local C_TOOL=docker
+  local C_TOOL=podman
   local IMAGE=mcr.microsoft.com/azure-cli:2.61.0
 
   if [ $# -eq 0 ]; then
