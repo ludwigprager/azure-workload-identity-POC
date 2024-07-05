@@ -22,7 +22,10 @@ if ! keyvault-exists $RESOURCE_GROUP $KEYVAULT_NAME; then
   azcli az keyvault secret set --vault-name ${KEYVAULT_NAME} --name ${KEYVAULT_SECRET_NAME} --value 'Hello!'
   
   echo "granting MI vault secret read permission"
-  azcli az keyvault set-policy --name ${KEYVAULT_NAME} --secret-permissions get --spn ${USER_ASSIGNED_CLIENT_ID}
+  azcli az keyvault set-policy --name ${KEYVAULT_NAME}\
+    -onone \
+    --secret-permissions get \
+    --spn ${USER_ASSIGNED_CLIENT_ID}
   
 else
   echo keyvault already exists

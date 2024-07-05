@@ -4,7 +4,7 @@ export RESOURCE_GROUP="aks-wi-oidc"
 
 # environment variables for the Azure Key Vault resource
 export AKS_NAME="aks-cluster"
-export KEYVAULT_NAME="azwi-kv-demo-007"
+export KEYVAULT_NAME="azwi-kv-demo-008"
 export KEYVAULT_SECRET_NAME="my-secret"
 
 # environment variables for the Kubernetes Service account & federated identity credential
