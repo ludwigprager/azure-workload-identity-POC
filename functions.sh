@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 install-kubectl() {
   # install kubectl
   if [[ ! -f ./kubectl ]]; then
@@ -17,7 +16,7 @@ get-subscription-id() {
   local subscription_id=$(azcli az account list -o json | jq -r .[].id)
 
   if [[ ! -z ${subscription_id} ]]; then
-    printf ${subscription_id}
+    printf "${subscription_id}"
   fi
 }
 export -f get-subscription-id
@@ -55,7 +54,7 @@ get-identity-id-from-identity-name() {
     --name ${identity_name} \
     --query 'clientId' -otsv)
 
-  printf $id
+  printf "$id"
 }
 export -f get-identity-id-from-identity-name
 
@@ -64,12 +63,9 @@ aks-cluster-exists() {
   local cluster_name=$2
 
   if azcli az aks show --name $cluster_name -g $resource_group > /dev/null 2>&1 ; then
-    # 0 = true
     return 0 
-  else
-    # 1 = false
-    return 1
   fi
+  return 1
 }
 export -f aks-cluster-exists
 
